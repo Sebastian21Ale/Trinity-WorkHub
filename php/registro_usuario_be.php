@@ -6,6 +6,7 @@ $nombre_completo = $_POST['nombre_completo'];
 $correo = $_POST['correo'];
 $usuario = $_POST['usuario'];
 $contrasena = $_POST['contrasena'];
+$contrasena = hash('sha512', $contrasena);
 
 $query = "INSERT INTO usuarios(nombre_completo, correo, usuario, contrasena)
           VALUES('$nombre_completo', '$correo', '$usuario', '$contrasena')";
@@ -23,8 +24,6 @@ if(mysqli_num_rows($verificar_correo) > 0){
 
     exit();
 }
-
-$ejecutar = mysqli_query($conexion, $query);
 
 $verificar_usuario = mysqli_query($conexion, "SELECT * FROM usuarios WHERE usuario='$usuario'");
 
